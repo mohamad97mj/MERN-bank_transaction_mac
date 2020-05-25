@@ -32,11 +32,17 @@ const toolbar = (props) => (
                                 </Nav.Item>
 
                                 <Nav.Item>
-                                    <Nav.Link id="nav-1" exact as={NavLink} to="/login">
+                                    <Nav.Link id="nav-1" exact as={NavLink} to="/">
                                         ورود
                                     </Nav.Link>
                                 </Nav.Item>
 
+
+                                <Nav.Item>
+                                    <Nav.Link id="nav-2" exact as={NavLink} to="/transaction">
+                                        ماک
+                                    </Nav.Link>
+                                </Nav.Item>
 
                                 <Nav.Item>
                                     <Nav.Link id="nav-2" exact as={NavLink} to="/about" disabled>

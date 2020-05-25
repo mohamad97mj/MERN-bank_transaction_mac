@@ -28,5 +28,5 @@ export {
 
 
 export {
-    upload
-} from '../store/actions/upload';
+    upload, transactionOnChangeHandler, postTransaction
+} from '../store/actions/transaction';

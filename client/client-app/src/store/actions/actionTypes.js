@@ -42,12 +42,18 @@ export const POST_PROFILE_FAIL = 'POST_PROFILE_FAIL';
 export const PROFILE_ON_CHANGE_HANDLER = 'PROFILE_ON_CHANGE_HANDLER';
 
 
-//upload...............................................................................................................
+//transaction...............................................................................................................
 
-export const UPLOAD_START = 'AUTH_START';
-export const UPLOAD_SUCCESS = 'AUTH_SUCCESS';
-export const UPLOAD_FAIL = 'AUTH_FAIL';
+export const TRANSACTION_START = 'TRANSACTION_START';
+export const TRANSACTION_SUCCESS = 'TRANSACTION_SUCCESS';
+export const TRANSACTION_FAIL = 'TRANSACTION_FAIL';
 
+
+export const UPLOAD_START = 'UPLOAD_START';
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_FAIL = 'UPLOAD_FAIL';
+
+export const TRANSACTION_ON_CHANGE_HANDLER = "TRANSACTION_ON_CHANGE_HANDLER";
 
 
 

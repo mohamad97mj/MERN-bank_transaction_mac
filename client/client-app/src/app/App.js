@@ -6,7 +6,7 @@ import Home from '../containers/Home/Home';
 import Profile from "../containers/Forms/Profile/Profile";
 import Main from "../containers/Forms/Main/Main";
 import Auth from "../containers/Forms/Auth/Auth";
-import Upload from "../containers/Forms/Transaction/Transaction";
+import Transaction from "../containers/Forms/Transaction/Transaction";
 import Panel from "../containers/Panel/Panel";
 import Register from "../containers/Forms/Auth/Register";
 import {connect} from 'react-redux';
@@ -29,10 +29,11 @@ class App extends Component {
             <Switch>
                 {/*<Route path="/profile" exact component={Profile}/>*/}
                 <Route path="/login" exact component={Auth}/>
-                <Route path="/upload" exact component={Upload}/>
+                <Route path="/transaction" exact component={Transaction}/>
                 {/*<Route path="/form" exact component={Main}/>*/}
                 <Route path="/signin" exact component={Register}/>
-                <Route path="/" exact component={Upload}/>
+                <Route path="/login" exact component={Auth}/>
+                <Route path="/" exact component={Auth}/>
                 <Redirect to="/"/>
             </Switch>
         );

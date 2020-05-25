@@ -29,7 +29,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rfdc": "^1.1.4",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "xlsx": "^0.16.1"
   },
   "scripts": {
     "start": "PORT=80 HOST=0.0.0.0 DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
@@ -55,5 +56,5 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3"
   },
-  "proxy" : "http://localhost:5000"
+  "proxy": "http://localhost:5000"
 }
