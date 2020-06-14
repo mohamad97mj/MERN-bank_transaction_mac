@@ -1,24 +1,9 @@
 import React, {Component} from 'react';
 
 import Spinner from '../../../components/UI/Spinner/Spinner';
-
-import {Grid, Button, Container, Box, TextField, Typography} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
-
-import * as XLSX from 'xlsx';
-
-
-// import Form from "react-bootstrap/Form";
-// import Grid from "react-bootstrap/Grid";
-// import Grid from "react-bootstrap/Grid";
-// import Button from "react-bootstrap/Button";
-// import Container from "react-bootstrap/Container";
-
-
 import {connect} from 'react-redux';
 import * as actions from '../../../api/index';
-
-import {Redirect} from "react-router-dom";
 
 const styles = {
     root: {
