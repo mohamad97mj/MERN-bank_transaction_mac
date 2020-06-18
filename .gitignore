@@ -3,3 +3,5 @@
 /client/client-app/package-lock.json
 /server/node_modules
 /server/package-lock.json
+/server/Uploads/accounts.xlsx
+/server/Downloads/updated-accounts.xlsx
