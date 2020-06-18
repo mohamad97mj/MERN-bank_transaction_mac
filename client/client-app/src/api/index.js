@@ -1,3 +1,3 @@
 export {
-    upload, transactionOnChangeHandler, postTransaction
+    upload, transactionOnChangeHandler, postTransaction, downloadIt
 } from '../store/actions/transaction';

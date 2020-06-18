@@ -6,6 +6,7 @@ const initialState = {
     data: {},
     selectedFile: null,
     uploaded: false,
+    downloaded: false,
     isDone: false,
 
 };
@@ -31,9 +32,18 @@ const uploadSuccess = (state, action) => {
     })
 }
 
+const downloadSuccess = (state, action) => {
+    return updateObject(state, {
+        downloaded: true,
+        // isDone: false,
+
+    })
+}
+
 const transactionSuccess = (state, action) => {
     return updateObject(state, {
         isDone: true,
+        downloaded : false,
     })
 }
 
@@ -49,6 +59,9 @@ const reducer = (state = initialState, action) => {
 
         case actionTypes.TRANSACTION_SUCCESS:
             return transactionSuccess(state, action);
+
+        case actionTypes.DOWNLOAD_SUCCESS:
+            return downloadSuccess(state, action);
 
         default:
             return state;

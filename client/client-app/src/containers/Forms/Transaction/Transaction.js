@@ -49,11 +49,30 @@ class Transaction extends Component {
 
     }
 
+    onDownloadHandler = () => {
+        this.props.onDownload();
+        // window.open('http:localhost:5000/api/download');
+
+    }
+
 
     inputOnChangeHandler = (e, control) => {
 
         this.props.onChangeHandler({control: control, value: e.target.value});
     };
+
+    downloadIt = () => {
+        var element = document.createElement('a');
+        element.setAttribute('href', "updated-accounts.xlsx");
+        element.setAttribute('download', "updated-accounts.xlsx");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
 
     render() {
 
@@ -63,8 +82,7 @@ class Transaction extends Component {
 
                     <div style={{textAlign: "center", marginTop: "50px"}}>
                         <h5>ابتدا قالب فایل اطلاعات حساب ها را از لینک دانلود کنید </h5>
-
-                        <a href="account-template.xlsx" download>دانلود</a>
+                        <a id="download-link" href="account-template.xlsx" download >دانلود</a>
 
                     </div>
 
@@ -76,8 +94,7 @@ class Transaction extends Component {
                             <input type="file" name="file" onChange={this.onChangeHandler}/>
                         </div>
                         <div>
-                            <button type="button" className="btn btn-success" onClick={this.onUploadHandler}
-                                    disabled={this.props.uploaded}> آپلود
+                            <button type="button" className="btn btn-success" onClick={this.onUploadHandler}> آپلود
                             </button>
 
                         </div>
@@ -125,7 +142,10 @@ class Transaction extends Component {
                     <div style={{textAlign: "center", marginTop: "50px"}}>
                         <h5>فایل اطلاعات به روز شده حساب ها را دانلود کنید </h5>
 
-                        <a id="download-link" href="updated-accounts.xlsx" download >دانلود</a>
+                        <button type="button" className="btn btn-success" onClick={this.onDownloadHandler}
+                                disabled={this.props.downloaded || !this.props.isDone}> دانلود
+                        </button>
+
                     </div>
 
                 </form>
@@ -165,6 +185,7 @@ const mapStateToProps = state => {
         transactionData: state.transaction.data,
         uploaded: state.transaction.uploaded,
         isDone: state.transaction.isDone,
+        downloaded: state.transaction.downloaded,
         // loading: state.profile.loading,
         // counter: state.profile.counter,
     }
@@ -177,7 +198,8 @@ const mapDispatchToProps = dispatch => {
         },
 
         onChangeHandler: (state) => dispatch(actions.transactionOnChangeHandler(state)),
-        onPostTransaction: (transactionData) => dispatch(actions.postTransaction(transactionData))
+        onPostTransaction: (transactionData) => dispatch(actions.postTransaction(transactionData)),
+        onDownload : () => dispatch(actions.downloadIt())
 
     }
 };

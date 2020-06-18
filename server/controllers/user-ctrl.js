@@ -1,15 +1,22 @@
-var multer = require('multer')
+const multer = require('multer');
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './Uploads')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
-})
+});
 
-var upload = multer({storage: storage}).single('file')
+let upload = multer({storage: storage}).single('file');
+
+
+myDownload = (req, res) => {
+
+    const file = `/home/mohamad/others/codes/new/bank-form-master/server/Downloads/updated-accounts.xlsx`;
+    res.download(file); // Set disposition and send it.
+};
 
 myUpload = (req, res) => {
 
@@ -52,14 +59,19 @@ myUpload = (req, res) => {
                                 message: "فایلی برای آپلود انتخاب نشده است"
                             })
                         }
-                        return res.status(200).json()
+
+
+                        res.setHeader(
+                            'Content-Disposition', 'attachment; filename=index.js; modification-date="Wed, 12 Feb 1997 16:29:51 -0500"'
+                        );
+
+                        res.status(200).json();
                     })
                 }
             )
         }
     });
 }
-
 
 
 myPostTransaction = async (req, res) => {
@@ -123,6 +135,21 @@ myPostTransaction = async (req, res) => {
                     let originIndex = findIndex(originAccount)
                     let destinationIndex = findIndex(destinationAccount)
 
+                    let wrongAccount = false;
+                    let message = ""
+                    if (originIndex === -1){
+                        wrongAccount = true;
+                        message =   "اشتباه است!" + originAccount + "شماره حساب مبداء به شماره "
+
+                    } else if (destinationIndex === -1) {
+                        wrongAccount = true;
+                        message =   "اشتباه است!" + destinationAccount + "شماره حساب مقصد به شماره "
+                    }
+
+                    if (wrongAccount){
+                        return res.status(201).json({message: message});
+                    }
+
                     backup[originIndex]["accountBalance"] -= amount;
                     backup[destinationIndex]["accountBalance"] += parseInt(amount);
 
@@ -132,12 +159,13 @@ myPostTransaction = async (req, res) => {
                     const json2xls = require('json2xls');
                     let xls = json2xls(backup);
 
-                    fs.writeFileSync('../client/client-app/public/updated-accounts.xlsx', xls, 'binary');
+                    fs.writeFileSync('./Downloads/updated-accounts.xlsx', xls, 'binary');
+                    fs.writeFileSync('./Uploads/accounts.xlsx', xls, 'binary');
+                    return res.status(200).json()
 
                 }
             })
 
-            return res.status(200).json()
         }
     });
 
@@ -146,7 +174,7 @@ myPostTransaction = async (req, res) => {
 
 
 module.exports = {
-
+    myDownload,
     myUpload,
     myPostTransaction,
 };

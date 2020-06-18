@@ -1,5 +1,9 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../my-axios';
+// var FileSaver = require('file-saver');
+var fileDownload = require('js-file-download');
+
+
 
 export const uploadStart = () => {
     return {
@@ -11,6 +15,15 @@ export const uploadSuccess = () => {
 
     return {
         type: actionTypes.UPLOAD_SUCCESS,
+        // user: user,
+
+    };
+};
+
+export const downloadSuccess = () => {
+
+    return {
+        type: actionTypes.DOWNLOAD_SUCCESS,
         // user: user,
 
     };
@@ -59,6 +72,27 @@ export const upload = (file) => dispatch => {
         );
 };
 
+export const downloadIt = () => dispatch => {
+
+
+
+    axios({
+        url: '/download',
+        method: 'GET',
+        responseType: 'blob', // important
+    }).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'updated-accounts.xlsx'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        dispatch(downloadSuccess())
+    }).catch((err) => {
+        alert(err);
+    });
+}
+
 
 export const postTransaction = (transactionData) => dispatch => {
 
@@ -78,7 +112,7 @@ export const postTransaction = (transactionData) => dispatch => {
         .then(res => {
 
             if (res.status === 200) {
-                transactionSuccess();
+                dispatch(transactionSuccess());
                 // document.getElementById("download-link").innerHTML = "hello"
                 alert("تراکنش  با موفقیت انجام شد")
             } else if (res.status === 201) {
