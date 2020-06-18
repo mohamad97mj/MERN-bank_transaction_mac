@@ -110,15 +110,7 @@ export const postTransaction = (transactionData) => dispatch => {
     axios.post(`/transaction`, tempTransactionData)
         // ;
         .then(res => {
-
-            if (res.status === 200) {
-                dispatch(transactionSuccess());
-                // document.getElementById("download-link").innerHTML = "hello"
-                alert("تراکنش  با موفقیت انجام شد")
-            } else if (res.status === 201) {
-                alert(res.data.message)
-            }
-
+            alert(res.data.message)
         })
         .catch(err => {
             alert("تراکنش انجام نشد! لطفا بعدا دوباره امتحان کنید")

@@ -17,7 +17,7 @@ myDownload = (req, res) => {
 
     let parent = path.dirname(__dirname)
 
-    const file = parent +  '/Downloads/updated-accounts.xlsx';
+    const file = parent + '/Downloads/updated-accounts.xlsx';
     res.download(file); // Set disposition and send it.
 };
 
@@ -138,16 +138,16 @@ myPostTransaction = async (req, res) => {
 
                     let wrongAccount = false;
                     let message = ""
-                    if (originIndex === -1){
+                    if (originIndex === -1) {
                         wrongAccount = true;
-                        message =   "اشتباه است!" + originAccount + "شماره حساب مبداء به شماره "
+                        message = "شماره حساب مبداء به شماره " + originAccount + "اشتباه است!"
 
                     } else if (destinationIndex === -1) {
                         wrongAccount = true;
-                        message =   "اشتباه است!" + destinationAccount + "شماره حساب مقصد به شماره "
+                        message = "شماره حساب مقصد به شماره " + destinationAccount + "اشتباه است!"
                     }
 
-                    if (wrongAccount){
+                    if (wrongAccount) {
                         return res.status(201).json({message: message});
                     }
 
@@ -162,7 +162,7 @@ myPostTransaction = async (req, res) => {
 
                     fs.writeFileSync('./Downloads/updated-accounts.xlsx', xls, 'binary');
                     fs.writeFileSync('./Uploads/accounts.xlsx', xls, 'binary');
-                    return res.status(200).json()
+                    return res.status(200).json({message: "تراکنش با موفقیت انجام شد"})
 
                 }
             })
