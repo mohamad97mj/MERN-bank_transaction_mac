@@ -1,4 +1,5 @@
 const multer = require('multer');
+const path = require('path');
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -14,7 +15,9 @@ let upload = multer({storage: storage}).single('file');
 
 myDownload = (req, res) => {
 
-    const file = `/home/mohamad/others/codes/new/bank-form-master/server/Downloads/updated-accounts.xlsx`;
+    let parent = path.dirname(__dirname)
+
+    const file = parent +  '/Downloads/updated-accounts.xlsx';
     res.download(file); // Set disposition and send it.
 };
 
@@ -22,7 +25,6 @@ myUpload = (req, res) => {
 
     const fs = require('fs');
     const directory = './Uploads';
-    const path = require('path');
 
 
     fs.readdir(directory, (err, files) => {
@@ -78,7 +80,6 @@ myPostTransaction = async (req, res) => {
 
 
     const fs = require('fs');
-    const path = require('path');
     let XLSX = require('xlsx')
 
     const directory = './Uploads';
